@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f766e">
+  <title>AFTEM Mobil İstasyon</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <div class="login-title">AFTEM Mobil İstasyon</div>
+      <div class="login-subtitle">Telefon için istasyon girişi yap ve sadece ilgili listeyi gör.</div>
+      <label class="field">
+        <span>İstasyon</span>
+        <select id="loginStationSelect">
+          <option>Kesim</option>
+          <option>Rodaj</option>
+          <option>Temper</option>
+          <option>Basım</option>
+          <option>Robot</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>API Adresi</span>
+        <input id="loginApiUrlInput" type="text" placeholder="Ornek: http://192.168.1.50:8765">
+      </label>
+      <button id="loginContinueBtn" class="primary-btn wide-btn">Devam Et</button>
+    </div>
+  </div>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <img class="brand-logo" src="./aftem_logo.png" alt="AFTEM CAM">
+        <div>
+          <div class="brand-title">AFTEM Mobil İstasyon</div>
+          <div class="brand-subtitle" id="currentStationSubtitle">Kesim İstasyonu</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button id="changeStationBtn" class="ghost-btn">İstasyon Değiştir</button>
+        <button id="refreshBtn" class="ghost-btn">Yenile</button>
+      </div>
+    </header>
+
+    <section class="panel">
+      <div class="panel-grid">
+        <label class="field">
+          <span>Arama</span>
+          <input id="searchInput" type="text" placeholder="Müşteri, proje veya sipariş no">
+        </label>
+      </div>
+      <div class="action-row">
+        <button id="selectAllBtn" class="secondary-btn">Tümünü Seç</button>
+        <button id="clearSelectionBtn" class="secondary-btn">Seçimi Kaldır</button>
+        <button id="finishSelectedBtn" class="primary-btn">Seçileni Bitir</button>
+      </div>
+    </section>
+
+    <section class="summary-strip">
+      <article class="stat-card">
+        <span>Aktif Kayıt</span>
+        <strong id="activeCount">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>Toplam Adet</span>
+        <strong id="totalQty">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>Toplam m2</span>
+        <strong id="totalM2">0</strong>
+      </article>
+    </section>
+
+    <main>
+      <section class="panel list-panel">
+        <div class="list-head">
+          <h1 id="listTitle">Kesim Listesi</h1>
+          <span id="connectionBadge" class="badge warn">Demo Mod</span>
+        </div>
+        <div id="jobList" class="job-list"></div>
+        <div id="emptyState" class="empty-state">Bu istasyonda bekleyen kayıt yok.</div>
+      </section>
+    </main>
+  </div>
+
+  <template id="jobCardTemplate">
+    <article class="job-card">
+      <label class="job-check">
+        <input type="checkbox" class="job-selector">
+        <span></span>
+      </label>
+      <div class="job-body">
+        <div class="job-top">
+          <strong class="job-order"></strong>
+          <span class="job-stage"></span>
+        </div>
+        <div class="job-grid">
+          <div><span>Müşteri</span><b class="job-customer"></b></div>
+          <div><span>Proje</span><b class="job-project"></b></div>
+          <div><span>Cam Türü</span><b class="job-glass-type"></b></div>
+          <div><span>Adet</span><b class="job-qty"></b></div>
+          <div><span>m2</span><b class="job-m2"></b></div>
+        </div>
+        <button class="inline-finish-btn">Bitir</button>
+      </div>
+    </article>
+  </template>
+
+  <script src="./app.js"></script>
+</body>
+</html>

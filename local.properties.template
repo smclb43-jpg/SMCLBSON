@@ -1,0 +1,3 @@
+## Android Studio kendi local.properties dosyasini olusturur.
+## Gerekirse sdk.dir yolunu elle doldur:
+## sdk.dir=C\:\\Users\\KULLANICI_ADI\\AppData\\Local\\Android\\Sdk
