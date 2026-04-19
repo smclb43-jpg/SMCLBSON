@@ -1,0 +1,33 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main", "master", "ana" ]
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Depoyu cek
+        uses: actions/checkout@v4
+
+      - name: Java 17 kur
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Gradle kur
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Debug APK derle
+        run: ./gradlew assembleDebug
+
+      - name: APK yukle
+        uses: actions/upload-artifact@v4
+        with:
+          name: aftem-mobil-istasyon-apk
+          path: app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
